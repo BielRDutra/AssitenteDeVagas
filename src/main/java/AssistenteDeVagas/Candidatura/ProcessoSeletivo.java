@@ -1,11 +1,36 @@
 package AssistenteDeVagas.Candidatura;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ProcessoSeletivo {
     public static void main(String[] args) {
-        imprimirSelecionados();
-        
+        String [] candidatos = {"FELIPE","MARCIA","JULIA","PAULO","AUGUSTO","MONICA"};
+        for(String candidato: candidatos){
+            entrandoEmContato(candidato);
+        }      
     }
+
+    static void entrandoEmContato(String candidato){
+        int tentativas = 1;
+        boolean continuarTentando = true;
+        boolean atendeu = false;
+        do { 
+            atendeu = atender();
+            if(atendeu){
+                System.out.println("O candidato " + candidato + " atendeu a ligação");
+                continuarTentando = false;
+            } else {
+                System.out.println("O candidato " + candidato + " não atendeu a ligação");
+                tentativas++;
+            }  
+        } while (continuarTentando && tentativas <3);
+
+    }
+
+    static boolean atender(){
+        return new Random().nextInt(3)==1;
+    }
+
         static void imprimirSelecionados(){
 
             String [] candidatos = {"FELIPE","MARCIA","JULIA","PAULO","AUGUSTO","MONICA"};
@@ -50,7 +75,7 @@ public class ProcessoSeletivo {
         static double valorPretendido(){
             return ThreadLocalRandom.current().nextDouble(1800, 2200);
 
-        }
+    }
 
     static void analisarCandidato(double salarioPretendido){
         double salarioBase = 2000.0;
